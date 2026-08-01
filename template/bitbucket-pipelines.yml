@@ -3,7 +3,7 @@
 # Only use spaces to indent your .yml configuration.
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
-image: node:10.15.3
+image: node:16
 
 clone:
   depth: full
@@ -31,7 +31,7 @@ pipelines:
            name: performance_tests
            caches:
              - npm
-           image: cypress/base:10
+           image: cypress/base:16
            script:
              - npm install -g newman
              - npm run test:performance
@@ -40,7 +40,7 @@ pipelines:
            caches:
              - npm
              - cypress
-           image: cypress/base:10
+           image: cypress/base:16
            script:
              - ./run_e2e_tests.sh
   branches:
