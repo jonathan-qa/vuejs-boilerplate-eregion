@@ -33,8 +33,24 @@ pipelines:
              - npm
            image: cypress/base:10
            script:
+             - npm ci
              - npm install -g newman
+             - npm run serve &
+             - |
+               ready=0
+               for i in $(seq 1 60); do
+                 if curl -sf "http://localhost:8080/" >/dev/null; then
+                   ready=1
+                   break
+                 fi
+                 sleep 2
+               done
+               if [ "$ready" -ne 1 ]; then
+                 echo "Timed out waiting for application server"
+                 exit 1
+               fi
              - npm run test:performance
+
     - step:
            name: e2e_tests
            caches:
@@ -62,7 +78,9 @@ pipelines:
             name: heroku
             script:
               - npm install -g heroku
-              - git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD              
+              - printf 'machine git.heroku.com\n  login heroku\n  password %s\n' "$HEROKU_API_KEY" > ~/.netrc
+              - chmod 600 ~/.netrc
+              - git push "https://git.heroku.com/${HEROKU_APP_NAME}.git" HEAD
 definitions:
   caches:
     npm: ~/.npm
