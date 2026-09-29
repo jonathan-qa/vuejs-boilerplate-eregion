@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit",
-    "test:e2e": "vue-cli-service test:e2e",
+    "serve": "node scripts/run-vue-cli.js serve",
+    "build": "node scripts/run-vue-cli.js build",
+    "test:unit": "node scripts/run-vue-cli.js test:unit",
+    "test:e2e": "node scripts/run-vue-cli.js test:e2e",
     "test:performance": "newman run tests/performance/trweb-app-performance-test.postman_collection.json",
-    "lint": "vue-cli-service lint"
+    "lint": "node scripts/run-vue-cli.js lint"
   },
   "cypress-cucumber-preprocessor": {
     "step_definitions": "tests/e2e/step_definitions/"
