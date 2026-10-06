@@ -34,11 +34,18 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080",
+					"raw": "http://127.0.0.1:8080/",
+					"protocol": "http",
 					"host": [
-						"localhost"
+						"127",
+						"0",
+						"0",
+						"1"
 					],
-					"port": "8080"
+					"port": "8080",
+					"path": [
+						""
+					]
 				}
 			},
 			"response": []
