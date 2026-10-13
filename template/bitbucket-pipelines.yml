@@ -62,7 +62,11 @@ pipelines:
             name: heroku
             script:
               - npm install -g heroku
-              - git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD              
+              # Bitbucket Pipelines checks out a detached HEAD; bare "HEAD" is not
+              # a pushable refspec and the deploy step always fails. Push the commit
+              # explicitly to Heroku's master branch.
+              - git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:refs/heads/master
+
 definitions:
   caches:
     npm: ~/.npm
