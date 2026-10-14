@@ -1,0 +1,5 @@
+# New Relic sample config uses vendor style; not app source.
+newrelic.js
+
+# Cypress/Cucumber helpers use a different style than Airbnb src rules.
+tests/e2e/**
